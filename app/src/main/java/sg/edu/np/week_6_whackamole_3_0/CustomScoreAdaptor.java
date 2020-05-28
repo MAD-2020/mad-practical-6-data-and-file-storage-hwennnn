@@ -1,5 +1,6 @@
 package sg.edu.np.week_6_whackamole_3_0;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,39 +13,51 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomScoreAdaptor extends RecyclerView.Adapter<CustomScoreViewHolder> {
-    /* Hint:
-        1. This is the custom adaptor for the recyclerView list @ levels selection page
 
-     */
+    UserData _userData;
+    ArrayList<Integer> _levelList;
+    ArrayList<Integer> _scoreList;
+    Context c;
     private static final String FILENAME = "CustomScoreAdaptor.java";
     private static final String TAG = "Whack-A-Mole3.0!";
+    private CustomScoreAdaptor.OnItemClickListener mListener;
+    static View view;
 
-    public CustomScoreAdaptor(UserData userdata){
-        /* Hint:
-        This method takes in the data and readies it for processing.
-         */
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(CustomScoreAdaptor.OnItemClickListener listener){
+        this.mListener = listener;
+    }
+
+    public CustomScoreAdaptor(Context c, UserData userdata){
+        this._userData = userdata;
+        this.c = c;
+        this._levelList = userdata.getLevels();
+        this._scoreList = userdata.getScores();
     }
 
     public CustomScoreViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        /* Hint:
-        This method dictates how the viewholder layuout is to be once the viewholder is created.
-         */
+         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.level_select,null);
+
+        return new CustomScoreViewHolder(view, mListener);
     }
 
     public void onBindViewHolder(CustomScoreViewHolder holder, final int position){
 
-        /* Hint:
-        This method passes the data to the viewholder upon bounded to the viewholder.
-        It may also be used to do an onclick listener here to activate upon user level selections.
+        String score = String.valueOf(_scoreList.get(position));
+        String level = String.valueOf(_levelList.get(position));
 
-        Log.v(TAG, FILENAME + " Showing level " + level_list.get(position) + " with highest score: " + score_list.get(position));
-        Log.v(TAG, FILENAME+ ": Load level " + position +" for: " + list_members.getMyUserName());
-         */
+        holder.level.setText(level);
+        holder.score.setText(score);
+
+//        Log.v(TAG, FILENAME+ ": Load level " + level + " for: " + _userData.getMyUserName());
+        Log.v(TAG, FILENAME + " Showing level " + level + " with highest score: " + score);
+
     }
 
     public int getItemCount(){
-        /* Hint:
-        This method returns the the size of the overall data.
-         */
+        return _levelList.size();
     }
 }

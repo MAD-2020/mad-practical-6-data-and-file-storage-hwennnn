@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Week_6_WhackAMole_3_0</string>
+    <string name="text_init">O</string>
+    <string name="back">back</string>
 </resources>
