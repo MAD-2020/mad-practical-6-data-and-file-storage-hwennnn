@@ -1,10 +1,5 @@
 package sg.edu.np.week_6_whackamole_3_0;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import static java.lang.String.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import static java.lang.String.format;
 
 public class Main3Activity extends AppCompatActivity {
 
@@ -41,7 +40,7 @@ public class Main3Activity extends AppCompatActivity {
 
         UserData userData = handler.findUser(username);
 
-        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view); //inflate the recycler view
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         myAdapter = new CustomScoreAdaptor(this, userData);
@@ -49,18 +48,17 @@ public class Main3Activity extends AppCompatActivity {
         myAdapter.setOnItemClickListener(new CustomScoreAdaptor.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                // set onclicklistener on each holder by parsing position from the adapter
                 Log.d(TAG, "onItemClick: "+position);
                 nextLevelQuery(username, position+1);
             }
         });
-        /* Hint:
-        This method receives the username account data and looks up the database for find the
-        corresponding information to display in the recyclerView for the level selections page.
-         */
 
         back_to_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // redirect to login page
+                Log.v(TAG, FILENAME + ": Redirect to login page");
                 Intent redirect_to_login = new Intent(Main3Activity.this, MainActivity.class);
                 startActivity(redirect_to_login);
                 finish();
@@ -75,7 +73,7 @@ public class Main3Activity extends AppCompatActivity {
     }
 
     private void nextLevelQuery(final String username, final int level){
-        Log.v(TAG, "Advance option given to user!");
+        Log.v(TAG, "Option given to user!");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Warning! Whack-A-Mole Incoming!");
@@ -98,6 +96,7 @@ public class Main3Activity extends AppCompatActivity {
     }
 
     private void nextLevel(String username, int level){
+        // redirect to whack-a-mole gaming page
         Intent activityName = new Intent(Main3Activity.this, Main4Activity.class);
         Bundle extras = new Bundle();
         extras.putString("username", username);

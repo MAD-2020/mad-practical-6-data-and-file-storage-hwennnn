@@ -17,17 +17,6 @@ import java.util.ArrayList;
 import static java.lang.String.format;
 
 public class Main2Activity extends AppCompatActivity {
-    /* Hint:
-        1. This is the create new user page for user to log in
-        2. The user can enter - Username and Password
-        3. The user create is checked against the database for existence of the user and prompts
-           accordingly via Toastbox if user already exists.
-        4. For the purpose the practical, successful creation of new account will send the user
-           back to the login page and display the "User account created successfully".
-           the page remains if the user already exists and "User already exist" toastbox message will appear.
-        5. There is an option to cancel. This loads the login user page.
-     */
-
 
     private static final String FILENAME = "Main2Activity.java";
     private static final String TAG = "Whack-A-Mole3.0!";
@@ -53,7 +42,6 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 String _username = username.getText().toString();
                 String _password = password.getText().toString();
 
@@ -74,6 +62,8 @@ public class Main2Activity extends AppCompatActivity {
                 Log.v(TAG, FILENAME + ": New user created successfully!");
                 resetText();
 
+                // redirect to login page
+                Log.v(TAG, FILENAME + ": Redirect to login page");
                 Intent activityName = new Intent(Main2Activity.this, MainActivity.class);
                 startActivity(activityName);
                 Toast.makeText(Main2Activity.this, "The account is created successfully.", Toast.LENGTH_SHORT).show();
@@ -85,6 +75,7 @@ public class Main2Activity extends AppCompatActivity {
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.v(TAG, FILENAME + ": Redirect to login page");
                 Intent redirect_to_login = new Intent(Main2Activity.this, MainActivity.class);
                 startActivity(redirect_to_login);
                 finish();
@@ -102,7 +93,6 @@ public class Main2Activity extends AppCompatActivity {
             levelList.add(i);
             scoreList.add(0);
         }
-
     }
 
     private void resetText(){

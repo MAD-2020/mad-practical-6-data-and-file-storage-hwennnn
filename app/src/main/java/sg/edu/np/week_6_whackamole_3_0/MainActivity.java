@@ -17,13 +17,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    /*
-        1. This is the main page for user to log in
-        2. The user can enter - Username and Password
-        3. The user login is checked against the database for existence of the user and prompts
-           accordingly via Toastbox if user does not exist. This loads the level selection page.
-        4. There is an option to create a new user account. This loads the create user page.
-     */
+
     private static final String FILENAME = "MainActivity.java";
     private static final String TAG = "Whack-A-Mole3.0!";
     MyDBHandler dbhandler;
@@ -58,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                // redirect to level select page
                 Log.v(TAG, FILENAME + ": Valid User! Logging in");
                 Intent intent = new Intent(MainActivity.this, Main3Activity.class);
                 Bundle extras = new Bundle();
