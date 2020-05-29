@@ -98,6 +98,7 @@ public class Main4Activity extends AppCompatActivity {
         username = b.getString("username");
         level = b.getInt("level");
         delay = Math.abs(level - 11); // to get the interval time of the placemoletimer. For example, level 10 will get 1s delay while level 1 will get 10s delay.
+        Log.v(TAG, FILENAME+ ": Load level " + level + " for: " + username);
         Log.d(TAG, "Level: "+ level + " Delay: "+ delay + "s");
 
         readyTimer();

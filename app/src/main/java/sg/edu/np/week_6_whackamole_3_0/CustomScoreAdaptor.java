@@ -51,8 +51,7 @@ public class CustomScoreAdaptor extends RecyclerView.Adapter<CustomScoreViewHold
 
         holder.level.setText(level);
         holder.score.setText(score);
-
-//        Log.v(TAG, FILENAME+ ": Load level " + level + " for: " + _userData.getMyUserName());
+        
         Log.v(TAG, FILENAME + " Showing level " + level + " with highest score: " + score);
 
     }
